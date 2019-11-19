@@ -1,30 +1,24 @@
 package com.example.training;
 
-import com.example.controller.PostServiceController;
-import com.example.model.City;
-import com.example.service.CityService;
-import org.junit.Test;
+import com.example.web.PostServiceController;
+import com.example.model.service.CityService;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-@RunWith(SpringRunner.class)
+import static org.mockito.Mockito.mock;
 
-@WebMvcTest(PostServiceController.class)
-public class ControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+@RunWith(MockitoJUnitRunner.class)
+public class ControllerTest extends AbstractControllerTest{
 
-    @MockBean
+    @Mock
     private CityService cityService;
 
-    @Test
-    public void testFindByPrefectureCode() throws Exception {
+    @Override
+    protected Object getTestedController() {
+        cityService = mock(CityService.class);
+        return new PostServiceController();
     }
 }
